@@ -1,0 +1,57 @@
+Yesh-MacBook-Pro:Github yesh$ cd latitude_coding_test
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ ls
+Dockerfile	README.md	parser.py	spec.json
+
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ docker build --build-arg=export_file=spec.json -t latitude_coding_test .
+Sending build context to Docker daemon  70.14kB
+Step 1/5 : FROM python:3.7
+3.7: Pulling from library/python
+57df1a1f1ad8: Pull complete 
+71e126169501: Pull complete 
+1af28a55c3f3: Pull complete 
+03f1c9932170: Pull complete 
+65b3db15f518: Pull complete 
+3e3b8947ed83: Pull complete 
+38d9e7938097: Pull complete 
+724043f425e0: Pull complete 
+6cf90f3f5863: Pull complete 
+Digest: sha256:5b430fe2263d891ce94145fdc320fe2a88336cc127301637625d6e5fe37bef60
+Status: Downloaded newer image for python:3.7
+ ---> 11c6e5fd966a
+Step 2/5 : ARG export_file=some.json
+ ---> Running in a0d148997d71
+Removing intermediate container a0d148997d71
+ ---> 2d334c67e9ac
+Step 3/5 : COPY $export_file spec.json
+ ---> cbb5a8f82b4c
+Step 4/5 : COPY parser.py /
+ ---> a7c3a393e97b
+Step 5/5 : CMD ["python", "./parser.py"]
+ ---> Running in a8e265d3a06c
+Removing intermediate container a8e265d3a06c
+ ---> 8fcbc6cd9d6c
+Successfully built 8fcbc6cd9d6c
+Successfully tagged latitude_coding_test:latest
+
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ docker image list
+REPOSITORY             TAG                 IMAGE ID            CREATED              SIZE
+latitude_coding_test   latest              8fcbc6cd9d6c        About a minute ago   876MB
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ docker run latitude_coding_test
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ docker ps -a
+CONTAINER ID        IMAGE                  COMMAND                CREATED             STATUS                      PORTS               NAMES
+d9af6185570d        latitude_coding_test   "python ./parser.py"   11 seconds ago      Exited (0) 10 seconds ago                       peaceful_ritchie
+
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ docker cp d9af6185570d:/sample_csv.csv export.csv
+
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ ls
+Dockerfile	README.md	export.csv	parser.py	spec.json
+
+Yesh-MacBook-Pro:latitude_coding_test yesh$ cat export.csv
+f1   ,f2          ,f3 ,f4,f5           ,f6     ,f7        ,f8           ,f9                  ,f10          
