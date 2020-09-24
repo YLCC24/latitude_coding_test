@@ -1,10 +1,10 @@
-Yesh-MacBook-Pro:Github yesh$ cd latitude_coding_test
+cd latitude_coding_test
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ ls
+ls
 Dockerfile	README.md	parser.py	spec.json
 
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ docker build --build-arg=export_file=spec.json -t latitude_coding_test .
+docker build --build-arg=export_file=spec.json -t latitude_coding_test .
 Sending build context to Docker daemon  70.14kB
 Step 1/5 : FROM python:3.7
 3.7: Pulling from library/python
@@ -36,22 +36,22 @@ Successfully built 8fcbc6cd9d6c
 Successfully tagged latitude_coding_test:latest
 
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ docker image list
+docker image list
 REPOSITORY             TAG                 IMAGE ID            CREATED              SIZE
 latitude_coding_test   latest              8fcbc6cd9d6c        About a minute ago   876MB
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ docker run latitude_coding_test
+docker run latitude_coding_test
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ docker ps -a
+docker ps -a
 CONTAINER ID        IMAGE                  COMMAND                CREATED             STATUS                      PORTS               NAMES
 d9af6185570d        latitude_coding_test   "python ./parser.py"   11 seconds ago      Exited (0) 10 seconds ago                       peaceful_ritchie
 
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ docker cp d9af6185570d:/sample_csv.csv export.csv
+docker cp d9af6185570d:/sample_csv.csv export.csv
 
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ ls
+ls
 Dockerfile	README.md	export.csv	parser.py	spec.json
 
-Yesh-MacBook-Pro:latitude_coding_test yesh$ cat export.csv
+cat export.csv
 f1   ,f2          ,f3 ,f4,f5           ,f6     ,f7        ,f8           ,f9                  ,f10          
